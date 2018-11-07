@@ -26,20 +26,28 @@ const argv = yargs
     .alias('help', 'h')
     .argv;
 
-// geocode.geocodeAddress(argv.address, (errorMessage, results) => {
-//     if(errorMessage){
-//         console.log(errorMessage);
-//     }else{
-//         console.log(JSON.stringify(results, undefined, 2))
-//     }
-// });
-
-
-weather.getWeather(32, 42, (errorMessage, weatherResults) => {
+geocode.geocodeAddress(argv.address, (errorMessage, results) => {
     if(errorMessage){
-        console.log(errorMessage)
+        console.log(errorMessage);
     }else{
-        console.log(JSON.stringify(weatherResults, undefined, 2))
-    }
+        // console.log(JSON.stringify(results, undefined, 2))
+        console.log(results.address)
 
+        weather.getWeather(results.latitude, results.longitude, (errorMessage, weatherResults) => {
+            if(errorMessage){
+                console.log(errorMessage)
+            }else{
+                // console.log(JSON.stringify(weatherResults, undefined, 2))
+                console.log(`It is currently ${weatherResults.temperature} with a humidity of ${weatherResults.humidity}`)
+            }
+        });
+
+        //By chaining the weather callback into the the geocode callback we are able to
+        // utilize the latitude and longitude of the the house that we specify in our
+        // terminal argv
+
+
+
+
+    }
 });

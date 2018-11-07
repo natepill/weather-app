@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/natepill/weather-app#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "mongoose": "^5.3.8",
     "request": "^2.88.0",
